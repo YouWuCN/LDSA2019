@@ -17,11 +17,10 @@ public class FirstLetterCount {
             StringTokenizer tokenizer = new StringTokenizer(line);
 	     while (tokenizer.hasMoreTokens()) {
 		c = tokenizer.nextToken().charAt(0);
-		if(c <65 || c>122 || (c>=91 && c <=96))
-		    continue;
-		else if (c>=65 && c<=90)
+		if (c>=65 && c<=90)
 		    c +=32;
-		//word.set(("" + tokenizer.nextToken().charAt(0)).toLowerCase());
+		else if(c <65 || c>122 || (c>=91 && c <=96))
+		    continue;
                 word.set(""+ c);
 		output.collect(word, one);  
 		
