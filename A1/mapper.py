@@ -1,11 +1,14 @@
 import sys
+import json 
 
-pronoun = ["han","hon","den","det","denna","denne","hen"]
-
-def read_input(file):
-    for line in file:
-	#split the txt into tweets
-        yield line.split(" ")
+def read_input(fl):
+   # with open(file,'r') as f:
+    for line in fl:
+        if line != "\r\n":
+            d = json.loads(line)
+            if "retweeted_status" not in d:
+                d = d["text"]
+                yield d.split(" ")
 
 def main(separator='\t'):
     # input comes from STDIN (standard input)
@@ -17,11 +20,11 @@ def main(separator='\t'):
         # Reduce step, i.e. the input for reducer.py
         #
         # tab-delimited; the trivial word count is 1
-	pronoun = ["han","hon","den","det","denna","denne","hen"] 
+        pronoun = ["han","hon","den","det","denna","denne","hen"] 
         for word in words:
-	    word = word.lower()
-	    if word in pronoun:
-		pronoun.remove(word)
+            word = word.lower()
+            if word in pronoun:
+                pronoun.remove(word)
                 print('%s%s%d' % (word, separator, 1))
 
 if __name__ == "__main__":
