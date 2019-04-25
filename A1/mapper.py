@@ -2,13 +2,12 @@ import sys
 import json 
 
 def read_input(fl):
-   # with open(file,'r') as f:
     for line in fl:
-        if line != "\r\n":
+        if line != "\n" and "retweeted_status" not in line:
             d = json.loads(line)
-            if "retweeted_status" not in d:
-                d = d["text"]
-                yield d.split(" ")
+           # if "retweeted_status" not in d:
+            d = d["text"]
+            yield d.split(" ")
 
 def main(separator='\t'):
     # input comes from STDIN (standard input)
